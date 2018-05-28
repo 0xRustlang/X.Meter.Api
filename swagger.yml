@@ -1,0 +1,87 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: XMeter
+host: localhost
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /reliability:
+    post:
+      summary: High-speed proxy checking
+      operationId: checkReliability
+      tags:
+        - meter
+      parameters:
+        - in: body
+          name: proxies
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: object
+              required:
+                - server
+                - port
+              properties:
+                server:
+                  type: string
+                  x-isnullable: false
+                port:
+                  type: string
+                  x-isnullable: false
+      responses:
+        "200":
+          description: Proxy list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProxyNode'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  ProxyNode:
+    properties:
+      server:
+        type: string
+        x-isnullable: false
+      port:
+        type: string
+        x-isnullable: false
+      iso_code:
+        type: string
+        x-isnullable: false
+      ratios:
+        type: array
+        items:
+          type: object
+          required:
+            - protocol
+            - loss_ratio
+            - ping_time_ms
+          properties:
+            ping_time_ms:
+              type: integer
+              format: int64
+              x-isnullable: false
+            loss_ratio:
+              type: number
+              format: double
+              x-isnullable: false
+            protocol:
+              type: string
+              x-isnullable: false
+  Error:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+        x-isnullable: false

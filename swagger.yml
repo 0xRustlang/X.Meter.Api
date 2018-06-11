@@ -64,6 +64,9 @@ definitions:
       iso_code:
         type: string
         x-isnullable: false
+      country:
+        type: string
+        x-isnullable: false
       transport:
         type: array
         items:

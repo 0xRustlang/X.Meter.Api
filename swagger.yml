@@ -67,26 +67,17 @@ definitions:
       country:
         type: string
         x-isnullable: false
-      transport:
-        type: array
-        items:
-          type: object
-          required:
-            - protocol
-            - loss_ratio
-            - ping_time_ms
-          properties:
-            ping_time_ms:
-              type: integer
-              format: int64
-              x-isnullable: false
-            loss_ratio:
-              type: number
-              format: double
-              x-isnullable: false
-            protocol:
-              type: string
-              x-isnullable: false
+      ping_time_ms:
+        type: integer
+        format: int64
+        x-isnullable: false
+      loss_ratio:
+        type: number
+        format: double
+        x-isnullable: false
+      protocol:
+        type: string
+        x-isnullable: false
   Error:
     required:
       - message

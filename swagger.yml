@@ -78,6 +78,12 @@ definitions:
       protocol:
         type: string
         x-isnullable: false
+    required:
+      - server
+      - port
+      - protocol
+      - loss_ratio
+      - ping_time_ms
   Error:
     required:
       - message
